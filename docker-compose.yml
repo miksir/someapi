@@ -1,0 +1,19 @@
+services:
+  master:
+    image: postgres:16-alpine
+    container_name: master
+    environment:
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - master_data:/var/lib/postgresql/data
+      - ./docker-compose/postgres-init:/docker-entrypoint-initdb.d
+    networks:
+      - postgres_network
+
+volumes:
+  master_data:
+
+networks:
+  postgres_network:
